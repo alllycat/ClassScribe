@@ -8,7 +8,7 @@ var express = require('express')
 
 // Setup
 app.set('views',__dirname + '/views') // Use the views folder to hold html
-app.set('bin',__dirname + '/backend/bin') // Use the views folder to hold html
+app.set('bin',__dirname + '/bin') // Use the views folder to hold html
 app.engine('html', require('ejs').renderFile); // Use ejs as a render engine
 app.use(express.static('views')) // Makes the static files available for get requests
 
@@ -30,22 +30,25 @@ function onPostRequest() {
 	app.post('index.html', function (req, res) {
 		console.log('Post request received')
 		req.on('data', function (data) {
-			// Save data to a referenceable file
-			fs.writeFile('/')
+			// Save data to referenceable audio file
+			var audiopath = __dirname + '/bin/audio'
+			fs.writeFile(audiopath, data)
 			// Convert the audio data (audio) to text
-			request()
+			convertToText(audiopath, res)
 		})
 	})
 }
-"https://api.idolondemand.com/1/api/sync/extractconcepts/v1?url=http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FUnited_Kingdom&apikey=c12920b8-d1f7-4fb0-b96c-bbfb0df79d6a"
-function convertToText (audio) {
-	 
+function convertToText (audiopath, res) {
+	// Transcribe the audio into text
+	var commandurl = 'https://api.idolondemand.com/1/api/sync/recognizespeech/v1' + '?file=' + audiopath + '&apikey=' + apikey
+	request(commandurl, function (e, response, text) {
+		// Save data to referencable text file
+		var fulltextpath = __dirname + '/bin/fulltext.txt'
+		fs.writeFile(fulltextpath, text)
+
+		res.send(text)
+
+	})
 }
-
-function saveToFile(data) {
-
-}
-
-function callAPI
 
 onPostRequest()
