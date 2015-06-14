@@ -7,13 +7,12 @@ var express = require('express')
 
 
 // Setup
-app.set('views',__dirname + '/views') // Use the views folder to hold html
-app.set('bin',__dirname + '/bin') // Use the views folder to hold html
+app.set('views',__dirname + '.') // Use the views folder to hold html
 app.engine('html', require('ejs').renderFile); // Use ejs as a render engine
-app.use(express.static('views')) // Makes the static files available for get requests
+app.use(express.static('.')) // Makes the static files available for get requests
 
 // Listen for requests
-var server = app.listen(3000, function {
+var server = app.listen(3000, function () {
 	console.log('The server has started on port 3000')
 })
 
