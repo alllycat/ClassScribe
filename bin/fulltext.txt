@@ -1,0 +1,8 @@
+{
+  "error": 4001,
+  "reason": "No file submitted",
+  "detail": {
+    "expected": "/Users/JB/Desktop/AngelHack/ClassScribe/AngelHack-2015---ClassScribe/bin/audio.mp3",
+    "found": []
+  }
+}
