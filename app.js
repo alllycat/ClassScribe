@@ -50,7 +50,8 @@ function convertToText (audiopath, res) {
 		request('https://api.idolondemand.com/1/job/result/' + jobID +'?apikey=' + 'c12920b8-d1f7-4fb0-b96c-bbfb0df79d6a', function (e1, response1, body1) {
 			console.log('Got text')
 			console.log(body1[0])
-			// 
+			// Write result to text 
+			res.render('summary.html')
 		})
 
 		
